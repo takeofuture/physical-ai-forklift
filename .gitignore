@@ -9,7 +9,8 @@ tensorboard*/
 models_ckpt*/
 
 # Videos
-videos/
+videos/*
+!videos/.gitkeep
 *.mp4
 
 # Temporary files
