@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Training outputs
+*.log
+tb*/
+tensorboard*/
+models_ckpt*/
+
+# Videos
+videos/
+*.mp4
+
+# Temporary files
+*.tmp
+*.pid
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,4016 @@
+<?xml version="1.0" ?>
+<sdf version="1.10">
+  <world name="warehouse_world">
+
+    <scene>
+      <ambient>0.95 0.95 0.95 1</ambient>
+      <background>0.98 0.98 0.99 1</background>
+      <shadows>false</shadows>
+    </scene>
+
+    <gui>
+      <camera name="user_camera">
+        <pose>0 0 140 0 1.57 0</pose>
+      </camera>
+    </gui>
+
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 80 0 0 0</pose>
+      <diffuse>1.0 1.0 1.0 1</diffuse>
+      <specular>0.4 0.4 0.4 1</specular>
+      <direction>0 0 -1</direction>
+    </light>
+
+    <light type="directional" name="fill_light">
+      <cast_shadows>false</cast_shadows>
+      <pose>50 -50 60 0 0 0</pose>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.3 -1</direction>
+    </light>
+
+
+    <model name="warehouse_static">
+      <static>true</static>
+
+      <link name="floor_link">
+        <pose>0.000 0.000 0.050 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>100.000 200.000 0.100</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>100.000 200.000 0.100</size></box>
+          </geometry>
+          <material>
+            <ambient>0.78 0.78 0.78 1.0</ambient>
+            <diffuse>0.78 0.78 0.78 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="wall_north">
+        <pose>0.000 99.900 10.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>100.000 0.200 20.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>100.000 0.200 20.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.92 0.94 1.0</ambient>
+            <diffuse>0.92 0.92 0.94 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="wall_south">
+        <pose>0.000 -99.900 10.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>100.000 0.200 20.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>100.000 0.200 20.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.92 0.94 1.0</ambient>
+            <diffuse>0.92 0.92 0.94 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="wall_east">
+        <pose>49.900 0.000 10.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 200.000 20.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 200.000 20.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.92 0.94 1.0</ambient>
+            <diffuse>0.92 0.92 0.94 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="wall_west">
+        <pose>-49.900 0.000 10.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 200.000 20.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 200.000 20.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.92 0.94 1.0</ambient>
+            <diffuse>0.92 0.92 0.94 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_00">
+        <pose>-35.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_00">
+        <pose>-35.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_01">
+        <pose>-31.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_01">
+        <pose>-31.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_02">
+        <pose>-28.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_02">
+        <pose>-28.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_03">
+        <pose>-24.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_03">
+        <pose>-24.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_04">
+        <pose>-21.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_04">
+        <pose>-21.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_05">
+        <pose>-17.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_05">
+        <pose>-17.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_06">
+        <pose>-14.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_06">
+        <pose>-14.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_07">
+        <pose>-10.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_07">
+        <pose>-10.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_08">
+        <pose>-7.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_08">
+        <pose>-7.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_09">
+        <pose>-3.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_09">
+        <pose>-3.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_10">
+        <pose>0.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_10">
+        <pose>0.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_11">
+        <pose>3.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_11">
+        <pose>3.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_12">
+        <pose>7.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_12">
+        <pose>7.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_13">
+        <pose>10.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_13">
+        <pose>10.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_14">
+        <pose>14.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_14">
+        <pose>14.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_15">
+        <pose>17.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_15">
+        <pose>17.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_16">
+        <pose>21.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_16">
+        <pose>21.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_17">
+        <pose>24.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_17">
+        <pose>24.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_18">
+        <pose>28.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_18">
+        <pose>28.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_19">
+        <pose>31.500 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_19">
+        <pose>31.500 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_left_20">
+        <pose>35.000 -6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_post_right_20">
+        <pose>35.000 -5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_shelf_1">
+        <pose>0.000 -6.000 0.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_shelf_2">
+        <pose>0.000 -6.000 2.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_shelf_3">
+        <pose>0.000 -6.000 4.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack00_shelf_4">
+        <pose>0.000 -6.000 6.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_00">
+        <pose>-35.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_00">
+        <pose>-35.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_01">
+        <pose>-31.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_01">
+        <pose>-31.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_02">
+        <pose>-28.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_02">
+        <pose>-28.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_03">
+        <pose>-24.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_03">
+        <pose>-24.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_04">
+        <pose>-21.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_04">
+        <pose>-21.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_05">
+        <pose>-17.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_05">
+        <pose>-17.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_06">
+        <pose>-14.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_06">
+        <pose>-14.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_07">
+        <pose>-10.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_07">
+        <pose>-10.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_08">
+        <pose>-7.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_08">
+        <pose>-7.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_09">
+        <pose>-3.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_09">
+        <pose>-3.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_10">
+        <pose>0.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_10">
+        <pose>0.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_11">
+        <pose>3.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_11">
+        <pose>3.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_12">
+        <pose>7.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_12">
+        <pose>7.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_13">
+        <pose>10.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_13">
+        <pose>10.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_14">
+        <pose>14.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_14">
+        <pose>14.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_15">
+        <pose>17.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_15">
+        <pose>17.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_16">
+        <pose>21.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_16">
+        <pose>21.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_17">
+        <pose>24.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_17">
+        <pose>24.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_18">
+        <pose>28.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_18">
+        <pose>28.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_19">
+        <pose>31.500 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_19">
+        <pose>31.500 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_left_20">
+        <pose>35.000 -0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_post_right_20">
+        <pose>35.000 0.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_shelf_1">
+        <pose>0.000 0.000 0.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_shelf_2">
+        <pose>0.000 0.000 2.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_shelf_3">
+        <pose>0.000 0.000 4.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack01_shelf_4">
+        <pose>0.000 0.000 6.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_00">
+        <pose>-35.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_00">
+        <pose>-35.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_01">
+        <pose>-31.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_01">
+        <pose>-31.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_02">
+        <pose>-28.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_02">
+        <pose>-28.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_03">
+        <pose>-24.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_03">
+        <pose>-24.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_04">
+        <pose>-21.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_04">
+        <pose>-21.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_05">
+        <pose>-17.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_05">
+        <pose>-17.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_06">
+        <pose>-14.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_06">
+        <pose>-14.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_07">
+        <pose>-10.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_07">
+        <pose>-10.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_08">
+        <pose>-7.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_08">
+        <pose>-7.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_09">
+        <pose>-3.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_09">
+        <pose>-3.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_10">
+        <pose>0.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_10">
+        <pose>0.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_11">
+        <pose>3.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_11">
+        <pose>3.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_12">
+        <pose>7.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_12">
+        <pose>7.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_13">
+        <pose>10.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_13">
+        <pose>10.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_14">
+        <pose>14.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_14">
+        <pose>14.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_15">
+        <pose>17.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_15">
+        <pose>17.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_16">
+        <pose>21.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_16">
+        <pose>21.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_17">
+        <pose>24.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_17">
+        <pose>24.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_18">
+        <pose>28.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_18">
+        <pose>28.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_19">
+        <pose>31.500 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_19">
+        <pose>31.500 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_left_20">
+        <pose>35.000 5.100 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_post_right_20">
+        <pose>35.000 6.900 4.000 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.200 0.200 8.000</size></box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.73 1.0</ambient>
+            <diffuse>0.7 0.7 0.73 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_shelf_1">
+        <pose>0.000 6.000 0.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_shelf_2">
+        <pose>0.000 6.000 2.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_shelf_3">
+        <pose>0.000 6.000 4.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+      <link name="rack02_shelf_4">
+        <pose>0.000 6.000 6.100 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.5</mu>
+                <mu2>1.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70.000 2.000 0.200</size></box>
+          </geometry>
+          <material>
+            <ambient>0.12 0.22 0.68 1.0</ambient>
+            <diffuse>0.12 0.22 0.68 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    
+    </model>
+    
+
+
+    <model name="pallet_001">
+      <pose>35.000 55.000 0.000 0 0 0.000</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+      <allow_auto_disable>false</allow_auto_disable>
+
+      <link name="pallet_link">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>22.000000</mass>
+          <inertia>
+            <ixx>1.254183</ixx><iyy>1.914183</iyy><izz>3.006667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+
+        <collision name="deck_collision">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+        </collision>
+        <visual name="deck_visual">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+          <material><ambient>0.55 0.35 0.18 1</ambient><diffuse>0.55 0.35 0.18 1</diffuse></material>
+        </visual>
+
+        <collision name="runner_left_collision">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+        <collision name="runner_right_collision">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+
+        <visual name="runner_left_visual">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+        <visual name="runner_right_visual">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <model name="pallet_002">
+      <pose>37.000 55.000 0.000 0 0 0.000</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+      <allow_auto_disable>false</allow_auto_disable>
+
+      <link name="pallet_link">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>22.000000</mass>
+          <inertia>
+            <ixx>1.254183</ixx><iyy>1.914183</iyy><izz>3.006667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+
+        <collision name="deck_collision">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+        </collision>
+        <visual name="deck_visual">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+          <material><ambient>0.55 0.35 0.18 1</ambient><diffuse>0.55 0.35 0.18 1</diffuse></material>
+        </visual>
+
+        <collision name="runner_left_collision">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+        <collision name="runner_right_collision">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+
+        <visual name="runner_left_visual">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+        <visual name="runner_right_visual">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <model name="pallet_003">
+      <pose>39.000 55.000 0.000 0 0 0.000</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+      <allow_auto_disable>false</allow_auto_disable>
+
+      <link name="pallet_link">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>22.000000</mass>
+          <inertia>
+            <ixx>1.254183</ixx><iyy>1.914183</iyy><izz>3.006667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+
+        <collision name="deck_collision">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+        </collision>
+        <visual name="deck_visual">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+          <material><ambient>0.55 0.35 0.18 1</ambient><diffuse>0.55 0.35 0.18 1</diffuse></material>
+        </visual>
+
+        <collision name="runner_left_collision">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+        <collision name="runner_right_collision">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+
+        <visual name="runner_left_visual">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+        <visual name="runner_right_visual">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <model name="pallet_004">
+      <pose>41.000 55.000 0.000 0 0 0.000</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+      <allow_auto_disable>false</allow_auto_disable>
+
+      <link name="pallet_link">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>22.000000</mass>
+          <inertia>
+            <ixx>1.254183</ixx><iyy>1.914183</iyy><izz>3.006667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+
+        <collision name="deck_collision">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+        </collision>
+        <visual name="deck_visual">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+          <material><ambient>0.55 0.35 0.18 1</ambient><diffuse>0.55 0.35 0.18 1</diffuse></material>
+        </visual>
+
+        <collision name="runner_left_collision">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+        <collision name="runner_right_collision">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+
+        <visual name="runner_left_visual">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+        <visual name="runner_right_visual">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <model name="pallet_005">
+      <pose>43.000 55.000 0.000 0 0 0.000</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+      <allow_auto_disable>false</allow_auto_disable>
+
+      <link name="pallet_link">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>22.000000</mass>
+          <inertia>
+            <ixx>1.254183</ixx><iyy>1.914183</iyy><izz>3.006667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+
+        <collision name="deck_collision">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+        </collision>
+        <visual name="deck_visual">
+          <pose>0 0 0.1900 0 0 0</pose>
+          <geometry><box><size>1.0000 0.8000 0.0400</size></box></geometry>
+          <material><ambient>0.55 0.35 0.18 1</ambient><diffuse>0.55 0.35 0.18 1</diffuse></material>
+        </visual>
+
+        <collision name="runner_left_collision">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+        <collision name="runner_right_collision">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+        </collision>
+
+        <visual name="runner_left_visual">
+          <pose>0 0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+        <visual name="runner_right_visual">
+          <pose>0 -0.3000 0.0500 0 0 0</pose>
+          <geometry><box><size>0.9000 0.1000 0.1000</size></box></geometry>
+          <material><ambient>0.45 0.28 0.14 1</ambient><diffuse>0.45 0.28 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+
+  </world>
+</sdf>
