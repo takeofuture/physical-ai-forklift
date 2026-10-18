@@ -11,6 +11,14 @@
 
 # 日本語
 
+## 0) 20パターンGoal評価
+
+同一の学習済み Goal-Conditioned SAC ポリシーに対して、ROW、BIN、LEVEL の組み合わせを変えた複数のGoalを与え、動作を評価しました。
+
+[YouTubeで20-Goal評価動画を見る](https://www.youtube.com/watch?v=z2_p-0GHh6M)
+
+※ この拡張評価動画は、全体の動作を短時間で確認できるよう16倍速で再生しています。
+
 ## 1) インストール方法と環境
 
 ### 想定環境
@@ -343,6 +351,14 @@ videos/demo_multigoal_results.csv
 ---
 
 # English
+
+## 0) Extended 20-Goal Evaluation
+
+The same trained Goal-Conditioned SAC policy was evaluated on multiple combinations of ROW, BIN, and LEVEL.
+
+[Watch the 20-Goal Evaluation Video on YouTube](https://www.youtube.com/watch?v=z2_p-0GHh6M)
+
+Note: This extended evaluation video is shown at 16x speed for compact visualization.
 
 ## 1) Installation and Environment
 
