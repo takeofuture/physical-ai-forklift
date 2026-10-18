@@ -1,5 +1,3 @@
-# physical-ai-forklift
-
 # Physical AI Forklift - Goal-Conditioned SAC with Gazebo
 
 **ENGLISH FOLLOWS**
